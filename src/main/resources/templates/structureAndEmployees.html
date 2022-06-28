@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hide a div</title>
+    <style>
+         #container_dep {
+             display: none;
+         }
+        #div_dep_button {
+            height: 50px;
+            width: 200px;
+            margin: 10px 55px;
+            position: relative;
+            left: 25%;
+        }
+         #my_button_dep {
+             position: relative;
+             top: 25%;
+             left: 10%;
+         }
+         #container_emp {
+             display: none;
+             height: 850px;
+             width: 400px;
+             margin: 30px 140px;
+             position: relative;
+         }
+         #div_button_emp {
+             height: 50px;
+             width: 200px;
+             margin: 10px 55px;
+             position: relative;
+             left: 30%;
+         }
+         #my_button_emp {
+             position: relative;
+             top: 25%;
+             left: 20%;
+         }
+         #table {
+             position: relative;
+             top: 5%;
+             left: 10%;
+         }
+         #container_mark {
+             display: none;
+             height: 250px;
+             width: 180px;
+             margin: 0 auto;
+             top: 50%;
+             left: 50%;
+         }
+        #div_button_mark {
+            height: 30px;
+            width: 80px;
+            margin: 10px 55px;
+            position: relative;
+        }
+        #my_button_mark {
+            position: static;
+        }
+         #container_hr {
+             display: none;
+             height: 250px;
+             width: 180px;
+             margin: 0 auto;
+             top: 50%;
+             left: 50%;
+         }
+         #div_button_hr {
+             height: 30px;
+             width: 80px;
+             margin: 10px 55px;
+             position: relative;
+         }
+         #my_button_hr {
+             position: static;
+         }
+         #container_pr {
+             display: none;
+             height: 250px;
+             width: 180px;
+             margin: 0 auto;
+             top: 50%;
+             left: 50%;
+         }
+        #div_button_pr {
+            height: 30px;
+            width: 80px;
+            margin: 10px 55px;
+            position: relative;
+        }
+         #my_button_pr {
+             position: static;
+         }
+         .split {
+             height: 95%;
+             width: 50%;
+             position: fixed;
+             z-index: 1;
+             top: 0;
+             overflow-x: hidden;
+             padding-top: 20px;
+         }
+         .left {
+             left: 0;
+         }
+         .right {
+             right: 0;
+         }
+         #line_block1 {
+             width:180px;
+             height:400px;
+             float:left;
+             margin: 40px 15px 15px 30px;
+             text-align:center;
+             align-content: center;
+             padding: 10px;
+         }
+         #line_block2 {
+             width:180px;
+             height:400px;
+             float:left;
+             margin: 40px 15px 15px 0;
+             text-align:center;
+             align-content: center;
+             padding: 10px;
+         }
+         #line_block3 {
+             width:180px;
+             height:400px;
+             float:left;
+             margin: 40px 15px 15px 0;
+             text-align:center;
+             align-content: center;
+             padding: 10px;
+         }
+    </style>
+</head>
+<body>
+<div class="split left">
+
+        <div id="div_dep_button">
+            <button id="my_button_dep">
+                Structure of departments
+            </button>
+        </div>
+
+        <div id="container_dep">
+
+            <div id="line_block1">
+                <div id="div_button_mark">
+                    <button id="my_button_mark">
+                        Marketing
+                    </button>
+                </div>
+                <br>
+                <div id="container_mark">
+                    <p>Purchasing</p>
+                    <p>Sales</p>
+                    </div>
+            </div>
+            <div id="line_block2">
+                <div id="div_button_hr">
+                    <button id="my_button_hr">
+                        HR
+                    </button>
+                </div>
+                <br>
+                <div id="container_hr">
+                    <p>Accounts</p>
+                    <p>Managements</p>
+                    </div>
+            </div>
+            <div id="line_block3">
+                <div  id="div_button_pr">
+                    <button id="my_button_pr">
+                        Production
+                    </button>
+                </div>
+                <br>
+                <div id="container_pr">
+                    <p>Manufacturing</p>
+                    <p>Distribution</p>
+                    </div>
+            </div>
+
+        </div>
+
+</div>
+
+<div class="split right">
+
+        <div id="div_button_emp">
+            <button id="my_button_emp">
+                List of employees
+            </button>
+        </div>
+        <div id="container_emp">
+
+            <div th:switch="${employees}">
+                <h2 th:case="null">No employees found!</h2>
+                <div th:case="*">
+                    <table id="table" border="1">
+                        <title>Employee List</title>
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Surname</th>
+                            <th>Name</th>
+                            <th>Positions</th>
+                        </tr>
+                        <thead>
+                        <tbody>
+                        <tr th:each ="employee : ${employees}">
+                            <td th:utext="${employee.id_emp}" align="center">...</td>
+                            <td th:utext="${employee.name}">...</td>
+                            <td th:utext="${employee.surname}">...</td>
+                            <td th:utext="${employee.positions}">...</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+</div>
+
+</body>
+    <script>
+        const button_dep = document.querySelector("#my_button_dep")
+        const container_dep = document.querySelector("#container_dep")
+
+        button_dep.addEventListener("click", function () {
+            if(container_dep.style.display === "block") {
+                container_dep.style.display = "none"
+            } else {
+                container_dep.style.display = "block"
+            }
+        })
+        const button_emp = document.querySelector("#my_button_emp")
+        const container_emp = document.querySelector("#container_emp")
+
+        button_emp.addEventListener("click", function () {
+            if(container_emp.style.display === "block") {
+                container_emp.style.display = "none"
+            } else {
+                container_emp.style.display = "block"
+            }
+        })
+        const button_mark = document.querySelector("#my_button_mark")
+        const container_mark = document.querySelector("#container_mark")
+
+        button_mark.addEventListener("click", function () {
+            if(container_mark.style.display === "block") {
+                container_mark.style.display = "none"
+            } else {
+                container_mark.style.display = "block"
+            }
+        })
+        const button_hr = document.querySelector("#my_button_hr")
+        const container_hr = document.querySelector("#container_hr")
+
+        button_hr.addEventListener("click", function () {
+            if(container_hr.style.display === "block") {
+                container_hr.style.display = "none"
+            } else {
+                container_hr.style.display = "block"
+            }
+        })
+        const button_pr = document.querySelector("#my_button_pr")
+        const container_pr = document.querySelector("#container_pr")
+
+        button_pr.addEventListener("click", function () {
+            if(container_pr.style.display === "block") {
+                container_pr.style.display = "none"
+            } else {
+                container_pr.style.display = "block"
+            }
+        })
+    </script>
+</html>
