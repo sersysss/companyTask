@@ -27,23 +27,7 @@
              left: 10%;
              background-color: fuchsia;
          }
-         .container_mark {
-             display: none;
-             position: relative;
-             height: 115px;
-             width: 100px;
-             margin: 10px 120px;
-             background-color: greenyellow;
-         }
-         .container_hr {
-             display: none;
-             position: relative;
-             height: 115px;
-             width: 100px;
-             margin: 10px 120px;
-             background-color: greenyellow;
-         }
-         .container_pr {
+         .container {
              display: none;
              position: relative;
              height: 115px;
@@ -70,49 +54,77 @@
              display: block;
          }
          .btn {
+             -webkit-user-select: none;
+             text-align: center;
+             line-height: 40px;
              height: 40px;
              width: 180px;
              margin: 10px 55px;
              position: relative;
              left: 25%;
              background-color: darkkhaki;
+             border: 2px solid black;
          }
          .btn_dep {
+             -webkit-user-select: none;
+             text-align: center;
+             line-height: 40px;
              height: 40px;
              width: 180px;
-             margin: 10px 55px;
              position: relative;
+             margin: 10px 55px;
              left: 5%;
              background-color: darkkhaki;
+             border: 2px solid black;
          }
     </style>
 </head>
 <body>
 <div class="split left">
 
-        <input type="button" class="btn_dep" value="Structure of departments" onclick="shown('.container_dep')"/>
+        <div class="btn_dep" data-name="cont">
+            Structure of departments
+        </div>
 
         <div class="container_dep">
 
-                <input type="button" class="btn_dep" value="Marketing" onclick="shown('.container_mark')"/>
+            <div class="btn_dep" data-name="cont">
+                Marketing
+            </div>
 
-                <div class="container_mark">
-                    <input type="button" class="btn_dep" value="Purchasing"/>
-                    <input type="button" class="btn_dep" value="Sales"/>
+                <div class="container">
+                    <div class="btn_dep" data-name="cont">
+                        Purchasing
+                    </div>
+                    <div class="btn_dep" data-name="cont">
+                        Sales
+                    </div>
                 </div>
 
-                <input type="button" class="btn_dep" value="HR" onclick="shown('.container_hr')"/>
+            <div class="btn_dep" data-name="cont">
+                HR
+            </div>
 
-                <div class="container_hr">
-                    <input type="button" class="btn_dep" value="Accounts"/>
-                    <input type="button" class="btn_dep" value="Managements"/>
+                <div class="container">
+                    <div class="btn_dep" data-name="cont">
+                        Accounts
+                    </div>
+                    <div class="btn_dep" data-name="cont">
+                        Managements
+                    </div>
                 </div>
 
-                <input type="button" class="btn_dep" value="Production" onclick="shown('.container_pr')"/>
+            <div class="btn_dep" data-name="cont">
+                Production
+            </div>
 
-                <div class="container_pr">
-                    <input type="button" class="btn_dep" value="Manufacturing"/>
-                    <input type="button" class="btn_dep" value="Distribution"/>
+                <div class="container">
+                    <div class="btn_dep" data-name="cont">
+                        Manufacturing
+                    </div>
+                    <div class="btn_dep" data-name="cont">
+                        Distribution
+                    </div>
                 </div>
 
         </div>
@@ -120,7 +132,9 @@
 
 <div class="split right">
 
-    <input type="button" class="btn" value="List of employees" onclick="shown('.container_emp')"/>
+    <div class="btn" data-name="cont">
+        List of employees
+    </div>
 
         <div class="container_emp">
 
@@ -154,8 +168,11 @@
 
 </body>
     <script>
-        function shown(clazz) {
-            document.querySelector(clazz).classList.toggle("spoiler");
+        document.querySelectorAll("[data-name='cont']").forEach(function(item) {
+            item.addEventListener("click", headerClick); });
+
+        function headerClick() {
+            this.nextElementSibling.classList.toggle("spoiler");
         }
     </script>
 </html>
