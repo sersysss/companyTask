@@ -12,14 +12,20 @@
              left: 15%;
          }
          .container_emp {
+             text-align: center;
              display: none;
-             margin: 30px 140px;
+             height: 80%;
+             width: 80%;
+             overflow-y:scroll;
+             overflow-x: hidden;
              position: relative;
+             background-color: white;
          }
          .table {
              position: relative;
-             top: 5%;
-             left: 10%;
+             background-color: white;
+             top: 1%;
+             left: 1%;
          }
          .container {
              display: none;
@@ -47,18 +53,6 @@
          .spoiler {
              display: block;
          }
-         .btn {
-             -webkit-user-select: none;
-             text-align: center;
-             line-height: 40px;
-             height: 40px;
-             width: 180px;
-             margin: 10px 55px;
-             position: relative;
-             left: 25%;
-             background-color: darkkhaki;
-             border: 2px solid black;
-         }
          .btn_dep {
              -webkit-user-select: none;
              text-align: center;
@@ -66,10 +60,13 @@
              height: 40px;
              width: 180px;
              position: relative;
-             margin: 10px 55px;
-             left: 5%;
              background-color: darkkhaki;
              border: 2px solid black;
+             margin: 10px 55px;
+             left: 5%;
+         }
+         .btn_emp {
+             left: 18%;
          }
     </style>
 </head>
@@ -181,7 +178,7 @@
 
 <div class="split right">
 
-    <div class="btn" data-name="cont">
+    <div class="btn_dep btn_emp" data-name="cont">
         List of employees
     </div>
 
