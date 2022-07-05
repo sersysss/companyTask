@@ -5,6 +5,7 @@ import com.example.company.enums.SubDepartments;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class Sub_department {
@@ -67,5 +68,18 @@ public class Sub_department {
     @Override
     public String toString() {
         return name + ", department - " + department;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Sub_department)) return false;
+        Sub_department that = (Sub_department) o;
+        return getId_sub_dep() == that.getId_sub_dep() && getName() == that.getName();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId_sub_dep(), getName());
     }
 }

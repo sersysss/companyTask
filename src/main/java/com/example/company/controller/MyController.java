@@ -12,7 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class MyController {
@@ -24,8 +28,23 @@ public class MyController {
     public String showAllEmployees(Model model) {
 
         List<Employee> employees = employeeService.getEmployees();
+        List<Employee> purchasingEmployees = getEmployeesBySubDepartments(employees, SubDepartments.Purchasing);
+        List<Employee> salesEmployees = getEmployeesBySubDepartments(employees, SubDepartments.Sales);
+        List<Employee> accountsEmployees = getEmployeesBySubDepartments(employees, SubDepartments.Accounts);
+        List<Employee> managementsEmployees = getEmployeesBySubDepartments(employees, SubDepartments.Managements);
+        List<Employee> manufacturingEmployees = getEmployeesBySubDepartments(employees, SubDepartments.Manufacturing);
+        List<Employee> distributionEmployees = getEmployeesBySubDepartments(employees, SubDepartments.Distribution);
 
-        model.addAttribute("employees", employees);
+        Map<String, List<Employee>> map = new HashMap<>();
+        map.put("employees", employees);
+        map.put("purchasingEmployees", purchasingEmployees);
+        map.put("salesEmployees", salesEmployees);
+        map.put("accountsEmployees", accountsEmployees);
+        map.put("managementsEmployees", managementsEmployees);
+        map.put("manufacturingEmployees", manufacturingEmployees);
+        map.put("distributionEmployees", distributionEmployees);
+
+        model.addAllAttributes(map);
 
         return "structureAndEmployees";
     }
@@ -35,6 +54,21 @@ public class MyController {
         employeeService.saveEmployees(createEmployees());
 
         return "addEmployees";
+    }
+
+    public List<Employee> getEmployeesBySubDepartments(List<Employee> employees, SubDepartments subDepartment) {
+        List<Employee> employeeListOfSubDep = new ArrayList<>();
+        List<Position> positions;
+        for (int i = 0; i < employees.size(); i++) {
+            positions = employees.get(i).getPositions();
+
+            for (int j = 0; j < positions.size(); j++) {
+                if (positions.get(j).getSub_department().getName().equals(subDepartment)) {
+                    employeeListOfSubDep.add(employees.get(i));
+                }
+            }
+        }
+        return employeeListOfSubDep;
     }
 
     public List<Employee> createEmployees() {
@@ -74,16 +108,16 @@ public class MyController {
         Position pos17 = new Position(Positions.Distributor, subdep6);
         Position pos18 = new Position(Positions.Coordinator, subdep6);
 
-        Employee emp1 = new Employee("Mark", "Smith", pos1, pos2, pos3);
-        Employee emp2 = new Employee("Kate", "Jones", pos4, pos5);
+        Employee emp1 = new Employee("Mark", "Smith", pos1, pos8, pos3);
+        Employee emp2 = new Employee("Kate", "Jones", pos2, pos5);
         Employee emp3 = new Employee("Peter", "Leaf", pos6, pos7);
-        Employee emp4 = new Employee("Jone", "Sun", pos18, pos5, pos6);
-        Employee emp5 = new Employee("Mickael", "Moon", pos8, pos9);
-        Employee emp6 = new Employee("Cris", "Patt", pos10, pos12);
-        Employee emp7 = new Employee("Serg", "Trim", pos14, pos15, pos13);
-        Employee emp8 = new Employee("Kirill", "Lake", pos11, pos12, pos3);
+        Employee emp4 = new Employee("Jone", "Sun", pos18, pos5, pos16);
+        Employee emp5 = new Employee("Mickael", "Moon", pos13, pos9);
+        Employee emp6 = new Employee("Cris", "Patt", pos4, pos12);
+        Employee emp7 = new Employee("Serg", "Trim", pos17, pos15, pos2);
+        Employee emp8 = new Employee("Kirill", "Lake", pos10, pos12, pos3);
         Employee emp9 = new Employee("Dmitriy", "Big", pos9, pos14);
-        Employee emp10 = new Employee("Ivan", "Petrov", pos16, pos17);
+        Employee emp10 = new Employee("Ivan", "Petrov", pos11, pos17);
 
         return List.of(emp1, emp2, emp3, emp4, emp5, emp6, emp7, emp8, emp9, emp10);
     }

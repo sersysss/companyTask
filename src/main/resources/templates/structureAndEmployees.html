@@ -88,26 +88,76 @@
                         Purchasing
                     </div>
                     <div class="container">
-                        <div class="btn_dep" data-name="cont">
-                            Purchasing 1
+
+                        <div th:switch="${purchasingEmployees}">
+                            <h2 th:case="null">No purchasingEmployees found!</h2>
+                            <div th:case="*">
+                                <table class="table" border="1">
+                                    <title>PurchasingEmployees List</title>
+                                    <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Surname</th>
+                                        <th>Name</th>
+                                        <th>Position</th>
+                                    </tr>
+                                    <thead>
+                                    <tbody>
+                                    <tr th:each ="employee : ${purchasingEmployees}">
+                                        <td th:utext="${employee.id_emp}" align="center">...</td>
+                                        <td th:utext="${employee.name}">...</td>
+                                        <td th:utext="${employee.surname}">...</td>
+                                        <td>
+                                            <th:block th:each="position : ${employee.positions}">
+                                                <span th:if="${position.getSub_department().getName().toString() == 'Purchasing'}">
+                                                    <p th:utext="${position.name}"></p>
+                                                </span>
+                                            </th:block>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
 
-                        <div class="btn_dep" data-name="cont">
-                            Purchasing 2
-                        </div>
                     </div>
 
                     <div class="btn_dep" data-name="cont">
                         Sales
                     </div>
                     <div class="container">
-                        <div class="btn_dep" data-name="cont">
-                            Sales 1
+
+                        <div th:switch="${salesEmployees}">
+                            <h2 th:case="null">No salesEmployees found!</h2>
+                            <div th:case="*">
+                                <table class="table" border="1">
+                                    <title>salesEmployees List</title>
+                                    <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Surname</th>
+                                        <th>Name</th>
+                                        <th>Position</th>
+                                    </tr>
+                                    <thead>
+                                    <tbody>
+                                    <tr th:each ="employee : ${salesEmployees}">
+                                        <td th:utext="${employee.id_emp}" align="center">...</td>
+                                        <td th:utext="${employee.name}">...</td>
+                                        <td th:utext="${employee.surname}">...</td>
+                                        <td>
+                                            <th:block th:each="position : ${employee.positions}">
+                                                <span th:if="${position.getSub_department().getName().toString() == 'Sales'}">
+                                                    <p th:utext="${position.name}"></p>
+                                                </span>
+                                            </th:block>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
 
-                        <div class="btn_dep" data-name="cont">
-                            Sales 2
-                        </div>
                     </div>
                 </div>
 
@@ -120,25 +170,75 @@
                         Accounts
                     </div>
                     <div class="container">
-                        <div class="btn_dep" data-name="cont">
-                            Accounts 1
+
+                        <div th:switch="${accountsEmployees}">
+                            <h2 th:case="null">No accountsEmployees found!</h2>
+                            <div th:case="*">
+                                <table class="table" border="1">
+                                    <title>accountsEmployees List</title>
+                                    <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Surname</th>
+                                        <th>Name</th>
+                                        <th>Position</th>
+                                    </tr>
+                                    <thead>
+                                    <tbody>
+                                    <tr th:each ="employee : ${accountsEmployees}">
+                                        <td th:utext="${employee.id_emp}" align="center">...</td>
+                                        <td th:utext="${employee.name}">...</td>
+                                        <td th:utext="${employee.surname}">...</td>
+                                        <td>
+                                            <th:block th:each="position : ${employee.positions}">
+                                                <span th:if="${position.getSub_department().getName().toString() == 'Accounts'}">
+                                                    <p th:utext="${position.name}"></p>
+                                                </span>
+                                            </th:block>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
 
-                        <div class="btn_dep" data-name="cont">
-                            Accounts 2
-                        </div>
                     </div>
                     <div class="btn_dep" data-name="cont">
                         Managements
                     </div>
                     <div class="container">
-                        <div class="btn_dep" data-name="cont">
-                            Managements 1
+
+                        <div th:switch="${managementsEmployees}">
+                            <h2 th:case="null">No managementsEmployees found!</h2>
+                            <div th:case="*">
+                                <table class="table" border="1">
+                                    <title>managementsEmployees List</title>
+                                    <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Surname</th>
+                                        <th>Name</th>
+                                        <th>Position</th>
+                                    </tr>
+                                    <thead>
+                                    <tbody>
+                                    <tr th:each ="employee : ${managementsEmployees}">
+                                        <td th:utext="${employee.id_emp}" align="center">...</td>
+                                        <td th:utext="${employee.name}">...</td>
+                                        <td th:utext="${employee.surname}">...</td>
+                                        <td>
+                                            <th:block th:each="position : ${employee.positions}">
+                                                <span th:if="${position.getSub_department().getName().toString() == 'Managements'}">
+                                                    <p th:utext="${position.name}"></p>
+                                                </span>
+                                            </th:block>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
 
-                        <div class="btn_dep" data-name="cont">
-                            Managements 2
-                        </div>
                     </div>
                 </div>
 
@@ -151,25 +251,75 @@
                         Manufacturing
                     </div>
                     <div class="container">
-                        <div class="btn_dep" data-name="cont">
-                            Manufacturing 1
+
+                        <div th:switch="${manufacturingEmployees}">
+                            <h2 th:case="null">No manufacturingEmployees found!</h2>
+                            <div th:case="*">
+                                <table class="table" border="1">
+                                    <title>manufacturingEmployees List</title>
+                                    <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Surname</th>
+                                        <th>Name</th>
+                                        <th>Position</th>
+                                    </tr>
+                                    <thead>
+                                    <tbody>
+                                    <tr th:each ="employee : ${manufacturingEmployees}">
+                                        <td th:utext="${employee.id_emp}" align="center">...</td>
+                                        <td th:utext="${employee.name}">...</td>
+                                        <td th:utext="${employee.surname}">...</td>
+                                        <td>
+                                            <th:block th:each="position : ${employee.positions}">
+                                                <span th:if="${position.getSub_department().getName().toString() == 'Manufacturing'}">
+                                                    <p th:utext="${position.name}"></p>
+                                                </span>
+                                            </th:block>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
 
-                        <div class="btn_dep" data-name="cont">
-                            Manufacturing 2
-                        </div>
                     </div>
                     <div class="btn_dep" data-name="cont">
                         Distribution
                     </div>
                     <div class="container">
-                        <div class="btn_dep" data-name="cont">
-                            Distribution 1
+
+                        <div th:switch="${distributionEmployees}">
+                            <h2 th:case="null">No distributionEmployees found!</h2>
+                            <div th:case="*">
+                                <table class="table" border="1">
+                                    <title>distributionEmployees List</title>
+                                    <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Surname</th>
+                                        <th>Name</th>
+                                        <th>Position</th>
+                                    </tr>
+                                    <thead>
+                                    <tbody>
+                                    <tr th:each ="employee : ${distributionEmployees}">
+                                        <td th:utext="${employee.id_emp}" align="center">...</td>
+                                        <td th:utext="${employee.name}">...</td>
+                                        <td th:utext="${employee.surname}">...</td>
+                                        <td>
+                                            <th:block th:each="position : ${employee.positions}">
+                                                <span th:if="${position.getSub_department().getName().toString() == 'Distribution'}">
+                                                    <p th:utext="${position.name}"></p>
+                                                </span>
+                                            </th:block>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
 
-                        <div class="btn_dep" data-name="cont">
-                            Distribution 2
-                        </div>
                     </div>
                 </div>
 
