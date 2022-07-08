@@ -88,4 +88,12 @@ public class Employee {
         return Objects.hash(getId_emp());
     }
 
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", positions=" + positions +
+                '}';
+    }
 }

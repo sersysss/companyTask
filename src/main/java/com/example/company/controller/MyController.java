@@ -12,11 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class MyController {
@@ -58,12 +54,12 @@ public class MyController {
 
     public List<Employee> getEmployeesBySubDepartments(List<Employee> employees, SubDepartments subDepartment) {
         List<Employee> employeeListOfSubDep = new ArrayList<>();
-        List<Position> positions;
+        Set<Position> positions;
         for (int i = 0; i < employees.size(); i++) {
-            positions = employees.get(i).getPositions();
+            positions = new HashSet<>(employees.get(i).getPositions());
 
-            for (int j = 0; j < positions.size(); j++) {
-                if (positions.get(j).getSub_department().getName().equals(subDepartment)) {
+            for (Position pos : positions) {
+                if (pos.getSub_department().getName().equals(subDepartment) && !employeeListOfSubDep.contains(employees.get(i))) {
                     employeeListOfSubDep.add(employees.get(i));
                 }
             }
